@@ -1,0 +1,14 @@
+--Теперь посмотрим на динамику общей суммы выручки по месяцам.
+--Посчитайте выручку (Revenue) по месяцам (обратите внимание, что в таблице указана цена одной единицы товара и количество купленного товара), округлив InvoiceDate к началу месяца с помощью toStartOfMonth().
+--В качестве ответа укажите сумму выручки (Revenue) из первой строки результирующей таблицы, используя сортировку по убыванию (DESC) по столбцу Revenue. Не забывайте отфильтровать строки по условию Description != 'Manual'
+
+SELECT
+    toStartOfMonth(InvoiceDate) as Month,
+    SUM(Quantity * UnitPrice) as Revenue
+FROM default.retail
+
+WHERE Description != 'Manual'
+GROUP BY 
+    Month
+Order by Revenue DESC
+limit 100
