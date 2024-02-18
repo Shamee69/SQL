@@ -1,0 +1,17 @@
+-- Давайте проверим, пользователи пришедшие из какого источника совершили наибольшее число покупок. В качестве ответа выберите название Source, юзеры которого совершили больше всего покупок.
+
+SELECT
+    a.Source,
+    count(c.UserID) as NumChecks
+FROM installs as a
+JOIN 
+    devices as b
+    ON a.DeviceID = b.DeviceID
+JOIN
+    checks as c
+    ON b.UserID = c.UserID
+GROUP BY
+    a.Source
+ORDER BY
+    NumChecks DESC
+LIMIT 100

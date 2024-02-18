@@ -1,0 +1,18 @@
+-- Теперь выясним, сколько всего уникальных юзеров совершили покупки в нашем приложении.
+--Объедините нужные таблицы, посчитайте число уникальных UserID для каждого источника (Source), и в качестве ответа укажите число пользователей, пришедших из Source_7.
+
+SELECT
+    a.Source,
+    count(DISTINCT c.UserID) as NumChecks
+FROM installs as a
+JOIN 
+    devices as b
+    ON a.DeviceID = b.DeviceID
+JOIN
+    checks as c
+    ON b.UserID = c.UserID
+GROUP BY
+    a.Source
+ORDER BY
+    NumChecks DESC
+LIMIT 100
